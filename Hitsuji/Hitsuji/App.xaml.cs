@@ -19,6 +19,10 @@ namespace Hitsuji
 
         protected override void OnSleep()
         {
+            // スマホのスリープモードをオンにする
+            DependencyService.Get<IDeviceService>().EnableSleep();
+
+            // プログラムの終了
             System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
         }
 

@@ -17,6 +17,13 @@ namespace Hitsuji
         void PlayNext(string title);
     }
 
+    // スマホのスリープ制御のためのインターフェースの作成
+    public interface IDeviceService
+    {
+        void DisableSleep();
+        void EnableSleep();
+    }
+
     // メインクラス
     public partial class MainPage : ContentPage
     {
@@ -33,6 +40,9 @@ namespace Hitsuji
 
             // おやすみの挨拶
             CrossTextToSpeech.Current.Speak(text: "おやすみなさい", pitch: (float)0.7, speakRate: (float)0.6);
+
+            // スマホのスリープモードをオフにする
+            DependencyService.Get<IDeviceService>().DisableSleep();
 
             // イメージ配列の格納
             Grid grid;
