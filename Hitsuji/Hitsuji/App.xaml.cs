@@ -19,6 +19,7 @@ namespace Hitsuji
 
         protected override void OnSleep()
         {
+            System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
         }
 
         protected override void OnResume()

@@ -9,11 +9,20 @@ using Plugin.TextToSpeech;
 
 namespace Hitsuji
 {
+    // ＢＧＭ再生のためのインターフェースの作成
+    public interface IMediaPlayer
+    {
+        Task PlayAsync(string title);
+        void Stop();
+        void PlayNext(string title);
+    }
+
+    // メインクラス
     public partial class MainPage : ContentPage
     {
         public Image[] _images;         // イメージ配列
         public bool counting;           // 数えてます
-        public int cnt=1;               // 羊の数
+        public int cnt=4990;               // 羊の数
 
         public MainPage()
         {
@@ -54,6 +63,9 @@ namespace Hitsuji
             _images[20].Source = ImageSource.FromResource("Hitsuji.Image.20.PNG");
             _images[21].Source = ImageSource.FromResource("Hitsuji.Image.21.PNG");
             _images[0].IsVisible = true;
+
+            // スタート前ＢＧＭの再生
+            DependencyService.Get<IMediaPlayer>().PlayAsync("music1");
         }
 
         public async void OnBtnClicked(Object o, EventArgs e)
@@ -62,14 +74,18 @@ namespace Hitsuji
                 num.Text = "最初から数えなおします";
                 cnt = 0;
             } else {                // そうじゃなかったらカウント開始
+                DependencyService.Get<IMediaPlayer>().PlayNext("music2");
                 counting = true;
                 btn.Text = "Reset";
                 while (cnt<10000) {
                     num.Text = String.Format("羊が{0:D}匹", cnt);
                     HitsujiAnime();
                     await CrossTextToSpeech.Current.Speak(text: String.Format("羊が{0:D}匹", cnt), pitch: (float)0.7, speakRate: (float)0.6);
-                    await Task.Delay(3000);
+                    await Task.Delay(2500);
                     cnt++;
+                    if (cnt == 5000) {
+                        DependencyService.Get<IMediaPlayer>().PlayNext("music3");
+                    }
                 }
             }
         }
