@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Image\0.PNG" />
+    <None Remove="Image\1.PNG" />
+    <None Remove="Image\10.PNG" />
+    <None Remove="Image\11.PNG" />
+    <None Remove="Image\12.PNG" />
+    <None Remove="Image\13.PNG" />
+    <None Remove="Image\14.PNG" />
+    <None Remove="Image\15.PNG" />
+    <None Remove="Image\16.PNG" />
+    <None Remove="Image\17.PNG" />
+    <None Remove="Image\18.PNG" />
+    <None Remove="Image\19.PNG" />
+    <None Remove="Image\2.PNG" />
+    <None Remove="Image\20.PNG" />
+    <None Remove="Image\21.PNG" />
+    <None Remove="Image\3.PNG" />
+    <None Remove="Image\4.PNG" />
+    <None Remove="Image\5.PNG" />
+    <None Remove="Image\6.PNG" />
+    <None Remove="Image\7.PNG" />
+    <None Remove="Image\8.PNG" />
+    <None Remove="Image\9.PNG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Image\0.PNG" />
+    <EmbeddedResource Include="Image\1.PNG" />
+    <EmbeddedResource Include="Image\10.PNG" />
+    <EmbeddedResource Include="Image\11.PNG" />
+    <EmbeddedResource Include="Image\12.PNG" />
+    <EmbeddedResource Include="Image\13.PNG" />
+    <EmbeddedResource Include="Image\14.PNG" />
+    <EmbeddedResource Include="Image\15.PNG" />
+    <EmbeddedResource Include="Image\16.PNG" />
+    <EmbeddedResource Include="Image\17.PNG" />
+    <EmbeddedResource Include="Image\18.PNG" />
+    <EmbeddedResource Include="Image\19.PNG" />
+    <EmbeddedResource Include="Image\2.PNG" />
+    <EmbeddedResource Include="Image\20.PNG" />
+    <EmbeddedResource Include="Image\21.PNG" />
+    <EmbeddedResource Include="Image\3.PNG" />
+    <EmbeddedResource Include="Image\4.PNG" />
+    <EmbeddedResource Include="Image\5.PNG" />
+    <EmbeddedResource Include="Image\6.PNG" />
+    <EmbeddedResource Include="Image\7.PNG" />
+    <EmbeddedResource Include="Image\8.PNG" />
+    <EmbeddedResource Include="Image\9.PNG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xam.Plugins.TextToSpeech" Version="4.0.0.7" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+</Project>
