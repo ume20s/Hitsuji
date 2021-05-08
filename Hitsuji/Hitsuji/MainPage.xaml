@@ -17,7 +17,7 @@
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
-        <Label Grid.Column="1" Grid.Row="2" x:Name="num" Text="" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="#000000" />
+        <Label Grid.Column="1" Grid.Row="2" x:Name="num" Text="眠れぬ夜に" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="#000000" />
         <Button Grid.Column="1" Grid.Row="4" x:Name="btn" Text="Start" FontSize="Large" Clicked="OnBtnClicked" TextColor="#000000" />
     </Grid>
 
