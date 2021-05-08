@@ -22,7 +22,7 @@ namespace Hitsuji
     {
         public Image[] _images;         // イメージ配列
         public bool counting;           // 数えてます
-        public int cnt=4990;               // 羊の数
+        public int cnt=1;               // 羊の数
 
         public MainPage()
         {
@@ -65,6 +65,7 @@ namespace Hitsuji
             _images[0].IsVisible = true;
 
             // スタート前ＢＧＭの再生
+            CrossTextToSpeech.Current.Speak(text: "おやすみなさい", pitch: (float)0.7, speakRate: (float)0.6);
             DependencyService.Get<IMediaPlayer>().PlayAsync("music1");
         }
 
@@ -77,7 +78,7 @@ namespace Hitsuji
                 DependencyService.Get<IMediaPlayer>().PlayNext("music2");
                 counting = true;
                 btn.Text = "Reset";
-                while (cnt<10000) {
+                while (cnt<=8000) {
                     num.Text = String.Format("羊が{0:D}匹", cnt);
                     HitsujiAnime();
                     await CrossTextToSpeech.Current.Speak(text: String.Format("羊が{0:D}匹", cnt), pitch: (float)0.7, speakRate: (float)0.6);
