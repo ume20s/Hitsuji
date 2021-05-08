@@ -31,11 +31,14 @@ namespace Hitsuji
             // もとからある初期化
             InitializeComponent();
 
+            // おやすみの挨拶
+            CrossTextToSpeech.Current.Speak(text: "おやすみなさい", pitch: (float)0.7, speakRate: (float)0.6);
+
             // イメージ配列の格納
             Grid grid;
             grid = g;
-            _images = new Image[22];
-            for (i = 0; i < 22; i++) {
+            _images = new Image[24];
+            for (i = 0; i < 24; i++) {
                 _images[i] = new Image();
                 _images[i].IsVisible = false;
                 grid.Children.Add(_images[i], 1, 1);
@@ -62,10 +65,11 @@ namespace Hitsuji
             _images[19].Source = ImageSource.FromResource("Hitsuji.Image.19.PNG");
             _images[20].Source = ImageSource.FromResource("Hitsuji.Image.20.PNG");
             _images[21].Source = ImageSource.FromResource("Hitsuji.Image.21.PNG");
+            _images[22].Source = ImageSource.FromResource("Hitsuji.Image.s0.png");
+            _images[23].Source = ImageSource.FromResource("Hitsuji.Image.s1.png");
             _images[0].IsVisible = true;
 
             // スタート前ＢＧＭの再生
-            CrossTextToSpeech.Current.Speak(text: "おやすみなさい", pitch: (float)0.7, speakRate: (float)0.6);
             DependencyService.Get<IMediaPlayer>().PlayAsync("music1");
         }
 
@@ -78,7 +82,7 @@ namespace Hitsuji
                 DependencyService.Get<IMediaPlayer>().PlayNext("music2");
                 counting = true;
                 btn.Text = "Reset";
-                while (cnt<=8000) {
+                while (cnt<=12000) {
                     num.Text = String.Format("羊が{0:D}匹", cnt);
                     HitsujiAnime();
                     await CrossTextToSpeech.Current.Speak(text: String.Format("羊が{0:D}匹", cnt), pitch: (float)0.7, speakRate: (float)0.6);
@@ -88,6 +92,9 @@ namespace Hitsuji
                         DependencyService.Get<IMediaPlayer>().PlayNext("music3");
                     }
                 }
+                counting = false;
+                cnt = 1;
+                Ending();
             }
         }
 
@@ -97,15 +104,56 @@ namespace Hitsuji
             int i;
 
             // とりあえず全部消す
-            for(i=0; i < 22; i++) {
+            for (i = 0; i < 22; i++)
+            {
                 _images[i].IsVisible = false;
             }
 
             // パタパタパタパタ
-            for (i = 0; i < 21; i++) {
+            for (i = 0; i < 21; i++)
+            {
                 _images[i].IsVisible = false;
-                _images[i+1].IsVisible = true;
+                _images[i + 1].IsVisible = true;
                 await Task.Delay(150);
+            }
+        }
+
+        // エンディング
+        async void Ending()
+        {
+            int i;
+
+            // とりあえず全部消す
+            for (i = 0; i < 22; i++) {
+                _images[i].IsVisible = false;
+            }
+
+            // 柵の前まで飛んで
+            for (i = 0; i < 7; i++) {
+                _images[i].IsVisible = false;
+                _images[i + 1].IsVisible = true;
+                await Task.Delay(150);
+            }
+
+            // 睡眠開始
+            num.Text = "羊が寝ている";
+            _images[22].IsVisible = true;
+            await CrossTextToSpeech.Current.Speak(text: "羊が寝ている", pitch: (float)0.7, speakRate: (float)0.6);
+
+            // 無限ループでグゥグゥグゥ・・・
+            while (true) {
+                if (counting == true) {
+                    _images[22].IsVisible = false;
+                    _images[23].IsVisible = false;
+                    break;
+                } else {
+                    _images[22].IsVisible = false;
+                    _images[23].IsVisible = true;
+                    await Task.Delay(1000);
+                    _images[22].IsVisible = true;
+                    _images[23].IsVisible = false;
+                    await Task.Delay(1000);
+                }
             }
         }
     }

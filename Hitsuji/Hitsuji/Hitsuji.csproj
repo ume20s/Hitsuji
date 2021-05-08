@@ -35,6 +35,8 @@
     <None Remove="Image\7.PNG" />
     <None Remove="Image\8.PNG" />
     <None Remove="Image\9.PNG" />
+    <None Remove="Image\s0.png" />
+    <None Remove="Image\s1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,6 +62,8 @@
     <EmbeddedResource Include="Image\7.PNG" />
     <EmbeddedResource Include="Image\8.PNG" />
     <EmbeddedResource Include="Image\9.PNG" />
+    <EmbeddedResource Include="Image\s0.png" />
+    <EmbeddedResource Include="Image\s1.png" />
   </ItemGroup>
 
   <ItemGroup>
